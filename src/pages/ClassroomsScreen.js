@@ -335,13 +335,12 @@ const ClassroomScreen = () => {
               Join Classroom
             </Button>
           </Grid>
-          {isTeacher && (
-            <Grid item>
-              <Button variant='contained' onClick={handleOpen}>
-                Create Classroom
-              </Button>
-            </Grid>
-          )}
+
+          <Grid item>
+            <Button variant='outlined' onClick={handleOpen}>
+              Create Classroom
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       {classrooms.length === 0 ? (

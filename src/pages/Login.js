@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Card, Stack, Link, Container, Typography } from '@mui/material';
@@ -10,6 +10,7 @@ import Page from '../components/Page';
 import { getAuth } from 'firebase/auth';
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import AuthSocial from 'src/components/AuthSocial';
+import { useEffect } from 'react';
 
 const auth = getAuth();
 
@@ -45,9 +46,15 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function Login() {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard/app', { replace: true });
+    }
+  }, [user]);
 
   return (
-    <RootStyle title='Edulearn'>
+    <RootStyle title='G Classroom'>
       <Container maxWidth='sm'>
         <ContentStyle>
           <Typography variant='h3'>Welcome to G Classroom</Typography>

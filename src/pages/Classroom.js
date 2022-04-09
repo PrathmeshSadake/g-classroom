@@ -106,16 +106,16 @@ const Classroom = () => {
                   aria-label='lab API tabs example'
                   // centered
                 >
-                  <Tab label='Announcements' value='1' />
-                  <Tab label='Assignments' value='2' />
+                  <Tab label='Assignments' value='1' />
+                  <Tab label='Class Work' value='2' />
                   <Tab label='Class Work' value='3' />
                 </TabList>
               </Box>
               <TabPanel value='1'>
-                <Announcements />
+                <Assignments />
               </TabPanel>
               <TabPanel value='2'>
-                <Assignments />
+                <ClassWork />
               </TabPanel>
               <TabPanel value='3'>
                 <ClassWork />
