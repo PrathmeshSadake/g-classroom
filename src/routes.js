@@ -9,6 +9,7 @@ import NotFound from './pages/Page404';
 import ClassroomScreen from './pages/ClassroomsScreen';
 import Classroom from './pages/Classroom';
 import Profile from './pages/Profile';
+import AssignmentScreen from './pages/AssignmentScreen';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +21,7 @@ const routes = (isLoggedIn) => [
       { path: 'app', element: <DashboardApp /> },
       { path: 'classroom', element: <ClassroomScreen /> },
       { path: 'classroom/:id', element: <Classroom /> },
+      { path: 'assignment/:id', element: <AssignmentScreen /> },
       { path: 'profile/me', element: <Profile /> },
     ],
   },

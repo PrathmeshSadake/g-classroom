@@ -541,17 +541,17 @@ const Assignments = () => {
             severity='success'
           >
             <Container>
-              {/* <Link to={`/dashboard/assignments/${work.id}`}> */}
-              <Typography variant='h6' color={'#000'}>
-                {work.title}
-              </Typography>
-              {/* </Link> */}
+              <Link to={`/dashboard/assignment/${work.id}`}>
+                <Typography variant='h6' color={'#000'}>
+                  {work.title}
+                </Typography>
+              </Link>
 
               <p style={{ fontSize: 12 }}>{work.name}</p>
               <p style={{ fontSize: 10 }}>{work.createdAt}</p>
 
               <Link
-                to={`/dashboard/assignments/${work.id}`}
+                to={`/dashboard/assignment/${work.id}`}
                 style={{ textDecoration: 'none' }}
               >
                 <Button
