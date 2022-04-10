@@ -35,7 +35,6 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import LinearWithValueLabel from './LinearProgressWithLabel';
-import useIsTeacher from 'src/hooks/useIsTeacher';
 
 const storage = getStorage();
 
@@ -53,7 +52,7 @@ const ClassWork = () => {
   const [user, loading, error] = useAuthState(auth);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isFilePicked, setIsFilePicked] = useState(false);
-  const isTeacher = useIsTeacher();
+
   const changeHandler = (event) => {
     if (event.target.files[0]) {
       setSelectedFile(event.target.files[0]);
@@ -327,13 +326,12 @@ const ClassWork = () => {
             Class Work
           </Typography>
         </Grid>
-        {isTeacher && (
-          <Grid item>
-            <Button variant='contained' onClick={handleOpen}>
-              Upload Class Work
-            </Button>
-          </Grid>
-        )}
+
+        <Grid item>
+          <Button variant='contained' onClick={handleOpen}>
+            Upload Class Work
+          </Button>
+        </Grid>
       </Grid>
       {classwork.map((work) => (
         <Container sx={{ my: 2 }}>

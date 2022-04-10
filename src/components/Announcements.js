@@ -27,7 +27,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import { useParams } from 'react-router-dom';
-import useIsTeacher from 'src/hooks/useIsTeacher';
 
 const Announcements = () => {
   let { id } = useParams();
@@ -39,7 +38,6 @@ const Announcements = () => {
   const [title, settitle] = React.useState('');
   const [description, setdescription] = React.useState('');
   const [user, loading, error] = useAuthState(auth);
-  const isTeacher = useIsTeacher();
   // Tabs
   const [value, setValue] = React.useState('1');
   const handleChange = (event, newValue) => {
@@ -166,13 +164,12 @@ const Announcements = () => {
             Announcements
           </Typography>
         </Grid>
-        {isTeacher && (
-          <Grid item>
-            <Button variant='contained' onClick={handleOpen}>
-              Create Announcement
-            </Button>
-          </Grid>
-        )}
+
+        <Grid item>
+          <Button variant='contained' onClick={handleOpen}>
+            Create Announcement
+          </Button>
+        </Grid>
       </Grid>
       {/* <Container> */}
       {classroomAnnouncements.map((announcement) => (

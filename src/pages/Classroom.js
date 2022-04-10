@@ -35,6 +35,7 @@ import Announcements from 'src/components/Announcements';
 import ClassWork from 'src/components/ClassWork';
 import ClassSubmissions from 'src/components/Submissions';
 import Assignments from 'src/components/Assignments';
+import ClassStudents from 'src/components/ClassStudents';
 
 const Classroom = () => {
   let { id } = useParams();
@@ -108,7 +109,7 @@ const Classroom = () => {
                 >
                   <Tab label='Assignments' value='1' />
                   <Tab label='Class Work' value='2' />
-                  <Tab label='Class Work' value='3' />
+                  <Tab label='Students' value='3' />
                 </TabList>
               </Box>
               <TabPanel value='1'>
@@ -118,7 +119,7 @@ const Classroom = () => {
                 <ClassWork />
               </TabPanel>
               <TabPanel value='3'>
-                <ClassWork />
+                <ClassStudents />
               </TabPanel>
             </TabContext>
           </Box>

@@ -43,7 +43,6 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import LinearWithValueLabel from './LinearProgressWithLabel';
-import useIsTeacher from 'src/hooks/useIsTeacher';
 
 const storage = getStorage();
 
@@ -62,7 +61,6 @@ const Assignments = () => {
   const [user, loading, error] = useAuthState(auth);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isFilePicked, setIsFilePicked] = useState(false);
-  const isTeacher = useIsTeacher();
   const changeHandler = (event) => {
     if (event.target.files[0]) {
       setSelectedFile(event.target.files[0]);
@@ -77,7 +75,8 @@ const Assignments = () => {
     // Upload file and metadata to the object 'images/mountains.jpg'
     const storageRef = ref(storage, 'assignments/' + selectedFile.name);
     const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-
+    handleClose();
+    settitle('');
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(
       'state_changed',
@@ -513,13 +512,12 @@ const Assignments = () => {
             Assignments
           </Typography>
         </Grid>
-        {isTeacher && (
-          <Grid item>
-            <Button variant='contained' onClick={handleOpen}>
-              Add Assignment
-            </Button>
-          </Grid>
-        )}
+
+        <Grid item>
+          <Button variant='contained' onClick={handleOpen}>
+            Add Assignment
+          </Button>
+        </Grid>
       </Grid>
       {assignments.map((work) => (
         <Container sx={{ my: 2 }}>
@@ -551,31 +549,29 @@ const Assignments = () => {
 
               <p style={{ fontSize: 12 }}>{work.name}</p>
               <p style={{ fontSize: 10 }}>{work.createdAt}</p>
-              {isTeacher && (
-                <Link
-                  to={`/dashboard/assignments/${work.id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <Button
-                    variant='contained'
-                    size='small'
-                    sx={{ mt: 2 }}
-                    onClick={() => setSubmissionOpen(true)}
-                  >
-                    View Submissions
-                  </Button>
-                </Link>
-              )}
-              {!isTeacher && (
+
+              <Link
+                to={`/dashboard/assignments/${work.id}`}
+                style={{ textDecoration: 'none' }}
+              >
                 <Button
                   variant='contained'
                   size='small'
                   sx={{ mt: 2 }}
                   onClick={() => setSubmissionOpen(true)}
                 >
-                  Add Submission
+                  View Submissions
                 </Button>
-              )}
+              </Link>
+
+              <Button
+                variant='contained'
+                size='small'
+                sx={{ mt: 2 }}
+                onClick={() => setSubmissionOpen(true)}
+              >
+                Add Submission
+              </Button>
             </Container>
           </Alert>
         </Container>

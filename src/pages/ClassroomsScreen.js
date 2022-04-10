@@ -87,13 +87,7 @@ const ClassroomScreen = () => {
   const handleOpen = () => {
     setopen(true);
   };
-  const images = [
-    'https://res.cloudinary.com/prathmeshsadake-devprojects/image/upload/v1647760258/edulearn/1_dfdurx.jpg',
-    'https://res.cloudinary.com/prathmeshsadake-devprojects/image/upload/v1647760257/edulearn/2_sstp9r.jpg',
-    'https://res.cloudinary.com/prathmeshsadake-devprojects/image/upload/v1647760256/edulearn/3_sxsfdf.jpg',
-    'https://res.cloudinary.com/prathmeshsadake-devprojects/image/upload/v1647760256/edulearn/4_wrzkoh.jpg',
-  ];
-  var imageURL = images[Math.floor(Math.random() * images.length)];
+  var imageURL = '/static/illustrations/bg.png';
   const handleCreateClassroom = async () => {
     // console.log(imageURL);
     try {
@@ -103,17 +97,28 @@ const ClassroomScreen = () => {
         creatorName: user.displayName,
         banner: imageURL,
         creatorPhoto: user.photoURL,
-        announcements: [],
         classwork: [],
         submissions: [],
         assignments: [],
+        students: [],
       });
       updateDoc(classRef, {
         id: classRef.id,
       });
       const classSnap = await getDoc(classRef);
       const classData = classSnap.data();
-
+      let classStudents = classData.students;
+      let isPresent = classStudents.find((student) => student.uid === user.uid);
+      if (!isPresent) {
+        classStudents.push({
+          name: user.displayName,
+          uid: user.uid,
+          avatar: user.photoURL,
+        });
+      }
+      updateDoc(classRef, {
+        students: classStudents,
+      });
       const userQ = query(
         collection(db, 'users'),
         where('uid', '==', user.uid)
@@ -152,7 +157,18 @@ const ClassroomScreen = () => {
         return alert(`Class doesn't exist, please provide correct ID`);
       }
       const classData = classSnap.data();
-
+      let classStudents = classData.students;
+      let isPresent = classStudents.find((student) => student.uid === user.uid);
+      if (!isPresent) {
+        classStudents.push({
+          name: user.displayName,
+          uid: user.uid,
+          avatar: user.photoURL,
+        });
+      }
+      updateDoc(classRef, {
+        students: classStudents,
+      });
       const userQ = query(
         collection(db, 'users'),
         where('uid', '==', user.uid)
