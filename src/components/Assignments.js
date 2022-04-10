@@ -519,63 +519,67 @@ const Assignments = () => {
           </Button>
         </Grid>
       </Grid>
-      {assignments.map((work) => (
-        <Container sx={{ my: 2 }}>
-          <Alert
-            variant='outlined'
-            icon={false}
-            action={
-              <Tooltip title='Download'>
-                <IconButton>
-                  <a
-                    href={work.downloadURL}
-                    target='_blank'
-                    download
-                    style={{ textDecoration: 'none' }}
+      {assignments.length < 1 ? (
+        <Container>No assignments yet. Lucky you!</Container>
+      ) : (
+        assignments.map((work) => (
+          <Container sx={{ my: 2 }}>
+            <Alert
+              variant='outlined'
+              icon={false}
+              action={
+                <Tooltip title='Download'>
+                  <IconButton>
+                    <a
+                      href={work.downloadURL}
+                      target='_blank'
+                      download
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <DownloadIcon />
+                    </a>
+                  </IconButton>
+                </Tooltip>
+              }
+              severity='success'
+            >
+              <Container>
+                <Link to={`/dashboard/assignment/${work.id}`}>
+                  <Typography variant='h6' color={'#000'}>
+                    {work.title}
+                  </Typography>
+                </Link>
+
+                <p style={{ fontSize: 12 }}>{work.name}</p>
+                <p style={{ fontSize: 10 }}>{work.createdAt}</p>
+
+                {/* <Link
+                  to={`/dashboard/assignment/${work.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Button
+                    variant='contained'
+                    size='small'
+                    sx={{ mt: 2 }}
+                    onClick={() => setSubmissionOpen(true)}
                   >
-                    <DownloadIcon />
-                  </a>
-                </IconButton>
-              </Tooltip>
-            }
-            severity='success'
-          >
-            <Container>
-              <Link to={`/dashboard/assignment/${work.id}`}>
-                <Typography variant='h6' color={'#000'}>
-                  {work.title}
-                </Typography>
-              </Link>
+                    View Submissions
+                  </Button>
+                </Link>
 
-              <p style={{ fontSize: 12 }}>{work.name}</p>
-              <p style={{ fontSize: 10 }}>{work.createdAt}</p>
-
-              <Link
-                to={`/dashboard/assignment/${work.id}`}
-                style={{ textDecoration: 'none' }}
-              >
                 <Button
                   variant='contained'
                   size='small'
                   sx={{ mt: 2 }}
                   onClick={() => setSubmissionOpen(true)}
                 >
-                  View Submissions
-                </Button>
-              </Link>
-
-              <Button
-                variant='contained'
-                size='small'
-                sx={{ mt: 2 }}
-                onClick={() => setSubmissionOpen(true)}
-              >
-                Add Submission
-              </Button>
-            </Container>
-          </Alert>
-        </Container>
-      ))}
+                  Add Submission
+                </Button> */}
+              </Container>
+            </Alert>
+          </Container>
+        ))
+      )}
     </Container>
   );
 };

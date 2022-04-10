@@ -8,7 +8,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { collection, query, where } from 'firebase/firestore';
-
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { db } from 'src/firebase/firebase-config';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -65,7 +65,86 @@ const AssignmentScreen = () => {
   return (
     <Container>
       {assignment ? (
-        <Container></Container>
+        <Container>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <Container>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <AssignmentIndIcon sx={{ fontSize: 50 }} color='primary' />
+                  <Typography
+                    sx={{ fontSize: 50, fontWeight: '600' }}
+                    color='primary'
+                  >
+                    {assignment.title}
+                  </Typography>
+                </div>
+
+                <Typography
+                  variant='body1'
+                  component='p'
+                  color='text.secondary'
+                >
+                  {assignment.name}
+                </Typography>
+                <Typography
+                  variant='body2'
+                  component='p'
+                  color='text.secondary'
+                >
+                  {assignment.createdAt}
+                </Typography>
+              </Container>
+            </Grid>
+            <Grid item xs={4}>
+              <Card sx={{ width: '100%', borderRadius: '10px', p: 2 }}>
+                <CardContent>
+                  <Typography
+                    sx={{
+                      fontSize: 30,
+                      fontWeight: '600',
+                    }}
+                    color='primary'
+                  >
+                    Your work
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    component='p'
+                    color='text.secondary'
+                  >
+                    Assigned
+                  </Typography>
+                </CardContent>
+
+                <Button
+                  variant='outlined'
+                  sx={{ boxShadow: 'none', width: '100%', my: 2 }}
+                  component={'a'}
+                >
+                  <a
+                    href={assignment.downloadURL}
+                    target='_blank'
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Download Assignment
+                  </a>
+                </Button>
+                <Button
+                  variant='contained'
+                  sx={{ boxShadow: 'none', width: '100%' }}
+                >
+                  Add Submission
+                </Button>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
       ) : (
         <Container>
           <Typography color='#fff' variant='h3'>
